@@ -40,7 +40,7 @@
 \renewcommand\refname{R\'ef\'erences}
 
 \renewcommand{\abstractname}{Pr\'eambule}
-\title{\textbf{Simulation \'electromagn\'etique \\ et technique de mesure RF}}
+\title{\textbf{Simulation \'electromagn\'etique \\ et techniques de mesure RF}}
 \author{Mohamed Hage Hassan \\ Cl\'ement Cheung}
 \date{9 Octobre 2017}
 \maketitle
@@ -137,12 +137,12 @@ schematic sont superpos\'es aux layout.
 
 
 Les param\`etres $S_{21}$ de chacune des simulations indiquent le comportement passe-bas du filtre. \`A $4 GHz$,
-on apparament une tr\`es bonne adaptation, \`a la r\'esonance, \`a plus que $-20 db$ en entr\'ee pour les deux mod\`eles.
+nous avons apparament une tr\`es bonne adaptation, \`a la r\'esonance, \`a plus que $-20 db$ en entr\'ee pour les deux mod\`eles.
 \\
 Une simulation EM est n\'ecessaire pour voir l'effet du couplage des condensateurs.\\
 
 Le mod\`ele schematic semble avoir une d\'eviation l\'eg\`ere par rapport \`a celui qui est maill\'e.
-Une bonne adaptation en entr\'ee indique que toute la puissance \'etait transf\'er\'ee \`a la charge, sachant qu'on garde
+Une bonne adaptation en entr\'ee indique que toute la puissance \'etait transf\'er\'ee \`a la charge, sachant que l'on garde
 un minimum de r\'eflexion.
 
 \clearpage
@@ -155,7 +155,6 @@ un minimum de r\'eflexion.
 \end{center}
 \end{figure}
 
-\textbf{\textcolor{red}{Explications ::}}
 
 \subsection{Simulation avec le cuivre}
 Cette fois, nous rempla\c cons le conducteur parfait du layout par du cuivre et relan\c cons la m\^eme simulation que pr\'ec\'edemment.
@@ -170,7 +169,6 @@ par la figure \ref{sim_momentum_copper}.
 \end{center}
 \end{figure}
 
-\textbf{\textcolor{red}{Explications ::}}\\
 Les diff\'erences observ\'ees sont minimes sauf \`a haute fr\'equence o\`u la pente du filtre au cuivre est l\'eg\`erement plus importante.\\
 Nos simulations n'ont pas rendu compte de diff\'erences majeures entre ces deux mod\`eles. La figure \ref{sim_3D} montre la vue 3D de
 notre filtre microruban.
@@ -288,6 +286,34 @@ Nous avons trouv\'e que la valeur height $h = 1.31 mm$ donnait le r\'esultat le 
 
 \clearpage
 \subsection{G\'en\'eration automatique des composants passifs}
+Sous ADS, il est possible de commander le logiciel pour cr\'eer des composants passifs (coupleurs, filtres..).
+En utilisant DesignGuide, on sp\'ecifie les param\`etres n\'ecessaires pour le logiciel (fr\'equence de coupure,
+pente de - n db/d\'ecade). DesignGuide va synth\'etiser un \'el\'ement passif en indiquant son ordre.
+
+L'un des \'el\'ements synth\'etis\'e est un coupleur hybride :
+
+\begin{figure}[!htb]
+\begin{center}
+  \includegraphics[scale=0.30]{Coupleur-Hybride-Synthese.png}
+  \caption{Sch\'ema d'un coupleur hybride auto-g\'en\'er\'e}
+  \label{Coupleur-Hybride-Synthese}
+\end{center}
+\end{figure}
+
+Une analyse des param\`etres W et L de chacun des brins du coupleur permet de v\'erifier que le sch\'ema
+de synth\`ese rempli bien les sp\'ecifications (imp\'edance caract\'eristique du brin $= Z_0$ ou $ \sqrt{2}/2 Z_0$).
+Les coefficients de r\'eflexion pour chaqu'une des voies sont analys\'es : on voit qu'il y a une adaptation totale
+en entr\'ee des ports 1 et 4 (\`a $-40 db$) et une r\'eflexion importante par rapport aux entr\'ees des ports 2 et 3.
+C'est li\'e aux caract\'eristiques du coupleur (passage en port 4 et r\'ejection totale d'une onde incidente en 1 vers les
+ports 2 et 3).
+
+\begin{figure}[!htb]
+\begin{center}
+  \includegraphics[scale=0.35]{Coupleur-Simulation-resultat.png}
+  \caption{Simulation du coupleur hybride}
+  \label{Coupleur-Simulation-resultat}
+\end{center}
+\end{figure}
 
 
 \clearpage
@@ -297,14 +323,14 @@ Le calibrage peut s'effectuer g\'en\'eralement selon deux m\'ethodes :
 
 \subsubsection{Calibrage ex-situ}
 \textbf{SOLT : Short Open Line Transition calibration} \\
-Ce type de calibrage est commercial, et d\'epend de la pr\'ecision des valeurs indiqu\'es par le fabirquant.
+Ce type de calibrage est commercial, et d\'epend de la pr\'ecision des valeurs indiqu\'es par le fabriquant.
 L'utilisation de ce type de calibrage entraine la n\'ecessit\'e de conna\^itre les standards fournis, ainsi
 que 12 termes d'erreurs \`a retrouver.
-Les charat\'eristiques g\'en\'eraux se r\'esume par :
+Les carat\'eristiques g\'en\'erales se r\'esument par :
 \begin{itemize}
-  \item[-] Rien \`a r\'egler du cot\'e d'analyseur vectoriel (pas d'algorithme).
+  \item[-] Rien \`a r\'egler du cot\'e de l'analyseur vectoriel (pas d'algorithme).
   \item[-] Proc\'edure de calibrage particuli\`erement longue.
-  \item[-] N\'ecessite une intervention en de-embedding.
+  \item[-] N\'ecessite une intervention de de-embedding.
 \end{itemize}
 
 La partie de de-embedding consiste donc de passer du plan de mesure (les PADs) vers le plan du DUT.
@@ -314,22 +340,22 @@ de s'\'etablir correctement.
 
 \subsubsection{Calibrage in-situ}
 \textbf{TRL : Thru Reflect Line } \\
-Ce type de calibrage consiste sur l'autocalibration, et c'est nous m\^eme que l'on fabrique.
-Le calibrage s'effectue, contrairement au calibrage SOLT, directement au plan du DUT, et n\'ecessite la connaissance
-de 8 termes d'erreurs.
+Ce type de calibrage repose sur l'autocalibration, et c'est nous m\^eme qui le fabriquons (m\'ethode maison).
+Le calibrage s'effectue, contrairement au calibrage SOLT, directement au plan du DUT, et ne n\'ecessite la connaissance
+que de 8 termes d'erreurs.
 
 \subsection{\'Etude th\'eorique}
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[scale=0.45]{de-embedding_scheme.png}
-  \caption{Mod\'elisation en \'el\'ements discrets des parasites}
+  \caption{Mod\'elisation des parasites en \'el\'ements discrets }
   \label{de-embedding-scheme}
 \end{center}
 \end{figure}
 
-Notre but c'est de retrouver $Y_{DUT}$, ou m\^eme $S_{DUT}$ du circuit ou \'el\'ement sous test, ici un pont en $\Pi$.
-On utilise la m\'ethode short-open de-embedding, qui consiste \`a enlever les parasites par un essai de 2 types de terminaisons :
+Notre but c'est de retrouver $Y_{DUT}$, ou m\^eme $S_{DUT}$ du circuit ou de l'\'el\'ement sous test, ici un pont en $\Pi$.
+On utilise la m\'ethode short-open de-embedding, qui consiste \`a enlever les parasites (fig. \ref{de-embedding-scheme}) par un essai de 2 types de terminaisons :
 court-circuit, puis circuit-ouvert. Rappelons que\cite{sim-elec-cours}:
 \[
 Y_{openpad} = Y_{Mesure} - Y_{open}
@@ -346,7 +372,7 @@ ce qui implique que :
 \[
 Y_{DUT} = \bigg( \big( Y_{openpad} \big)^{-1} - \big( Y_{shortpad} \big)^{-1} \bigg)^{-1}
 \]
-Ces transformations vont \^etre coder dans un bench global pour simuler le processus du de-embedding. Une analyse va comparer
+Ces transformations vont \^etre cod\'ees dans un bench global pour simuler le processus de de-embedding. Une analyse va comparer
 les r\'esulat des simulations entre l'\'etape de de-embedding, et une analyse de l'\'el\'ement seul:
 
 \begin{figure}[!htb]
@@ -363,9 +389,9 @@ Notre m\'ethode consiste \`a :
 \begin{itemize}
   \item [-] R\'ealisation de 3 sch\'emas pour prendre en compte les terminaisons court-circuit et circuit-ouvert, ainsi que le sch\'ema
   complet.
-  \item[-] Ex\'ecution de simulations pour les 2 terminaisions short et open.
-  \item[-] Ins\'ertion des DACs de simulations dans le sch\'ema g\'en\'eral et sa simulation, en consid\'erant les transformations indiqu\'ees
-  pour arriver jusqu'a $Y_{DUT}$.
+  \item[-] Ex\'ecution de simulations pour les 2 terminaisons short et open.
+  \item[-] Ins\'ertion des DACs (Data Acquisition Container) de simulations dans le sch\'ema g\'en\'eral et sa simulation,
+   en consid\'erant les transformations indiqu\'ees pour arriver jusqu'a $Y_{DUT}$.
   \item[-] Comparaison du $S_{DUT}$, $Y_{DUT}$ avec une simulation du $S_{bench}$, $Y_{bench}$ d'un bench du pont en $\Pi$.
 \end{itemize}
 
@@ -392,22 +418,33 @@ Pour toutes les simulations, on effectue un balayage en fr\'equence entre 1 et 8
 
 \begin{figure}[!htb]
 \begin{center}
-  \includegraphics[scale=0.40]{de-embedding_open_sim.png}
+  \includegraphics[scale=0.35]{de-embedding_open_sim.png}
   \caption{R\'esultat de simulation Open}
   \label{de-embedding-sim-open}
 \end{center}
 \end{figure}
 
+Pour la partie open, on remarque que le circuit est assimilable \`a un pont en $\Pi$ de capacit\'es, (sans la partie
+centrale), ce qui implique un comportement de filtrage : les diagrammes de $S_{11}$ et $S_{21}$ (compl\'ementaires)
+montrent une attenuation de transmition en augmentation de fr\'equence. On a aussi le comportement purement r\'eactif
+des capacit\'es, illustr\'e par $imag(Z_{21})$ (chute en fr\'equence).
+
 \begin{figure}[!htb]
 \begin{center}
-  \includegraphics[scale=0.40]{de-embedding_short_sim.png}
+  \includegraphics[scale=0.35]{de-embedding_short_sim.png}
   \caption{R\'esultat de simulation Short}
   \label{de-embedding-sim-short}
 \end{center}
 \end{figure}
 
-\clearpage
-\textbf{\textcolor{red}{Analyse :: }}
+Cependant, pour la partie short, l'\'element sous test est remplac\'e par un court-circuit : on se retouve avec l'ancienne
+configuration capacitive, mais aussi avec des att\'enuation du aux r\'esistances ($R_1$, $R_2$, $R_3$) des plots d'acc\`es.
+On a un ``d\'ecalage' de la fr\'equence de coupure du nouveau filtre (l'annulation de la transmition en $S_{11}$ est \`a $f= 70 GHz$).
+\\
+$Re\{Z_{21}\}$ indique le comportement r\'esistif du sch\'ema.\\
+Sachant que le comportement en short et open du circuit repr\'esente les parasites du circuit, il faut les \'eliminer : On reprend le
+mod\`ele initial et on applique les m\'ethodes math\'ematique. La robust\`esse du mod\`ele math\'ematique va indiquer l'exactitude ou
+non des r\'esultats de simulation, en comparaison avec les r\'esultats r\'eels.
 
 \begin{figure}[!htb]
 \begin{center}
@@ -417,6 +454,9 @@ Pour toutes les simulations, on effectue un balayage en fr\'equence entre 1 et 8
 \end{center}
 \end{figure}
 
+Les r\'esultats de simulations du de-embedding (fig. \ref{de-embedding-whole-sim}) montre le comportement avec parasite (premier rang),
+et celui en de-embedded (sans parasite, deuxi\`eme rang).
+
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[scale=0.40]{de-embedding_whole_sim.png}
@@ -425,34 +465,38 @@ Pour toutes les simulations, on effectue un balayage en fr\'equence entre 1 et 8
 \end{center}
 \end{figure}
 
-\textbf{\textcolor{red}{Analyse :: }}
+Ces deux r\'esultats sont compl\`etement diff\'erent : Les plots d'acc\`es ajoutes des distortions significatives qui peuvent compl\`etement
+changer le fonctionnement du circuit (dans ce cas). Le sch\'ema \'equivalent en de-embedded - sans parasites - est certainement proche du celui
+de la fig. \ref{de-embedding-bench}
 
 \clearpage
 \subsection{Comparaison avec un bench sans parasites}
 
-\textbf{\textcolor{red}{Analyse :: }}
+On peut voir, en comparant les fig.\ref{de-embedding-whole-sim} et \ref{de-embedding-bench_sim}, que le comportement des deux sch\'emas (de-embedding
+sans parasites et bench (sans plots d'acc\`es)), est identique.
 
 \begin{figure}[!htb]
 \begin{center}
   \includegraphics[scale=0.40]{de-embedding_bench_sim.png}
   \caption{Simulations du bench (sans parasites)}
-  \label{de-embedding-bench}
+  \label{de-embedding-bench_sim}
 \end{center}
 \end{figure}
 
-\clearpage
 \section{Conclusion}
 
 Ces s\'eances de travaux pratiques sous ADS ont permis d'\'etudier la conception de filtres et
  d'antennes en technologie microruban telle qu'utilis\'ee actuellement dans l'industrie.
 
-L'utilisation avanc\'ee de ce logiciel nous a amen\'e \`a effectuer des simulations de mod\`eles schematic et de mod\`ele layout, selon la m\'ethode d
-es moments \'electromagn\'etiques, et \`a comparer ces simulations. Nous avons remarqu\'e \`a plusieurs reprises les influences des couplages capacitifs
+L'utilisation avanc\'ee de ce logiciel nous a amen\'e \`a effectuer des simulations de mod\`eles schematic et de mod\`ele layout, selon la m\'ethode des
+ moments \'electromagn\'etiques, et \`a comparer ces simulations. Nous avons remarqu\'e \`a plusieurs reprises les influences des couplages capacitifs
 parasites entre les lignes de propagation sur les performances d'adaptation du filtre, influences qui n'\'etaient pas pr\'esentes lors des simulations
 du mod\`ele schematic.\\
 
 Nous avons vu pour le filtre passe-bas et l'antenne que l'adaptation \`a $50 \Omega$ se faisait par des variations g\'eom\'etriques de longueur du layout.
 
+Toutes ces techniques de design, mod\'elisation et de mesure des circuits RF sur l'outil logiciel ADS nous servira lors de la conception de
+ l'\'emetteur-r\'ecepteur Wifi pour le projet 3A Syrf.
 
 \clearpage
 \addcontentsline{toc}{section}{R\'ef\'erences}
@@ -460,7 +504,7 @@ Nous avons vu pour le filtre passe-bas et l'antenne que l'adaptation \`a $50 \Om
 \begin{thebibliography}{9}
 
 \bibitem{sim-elec-cours}
-\textit{Simulation \'electromagn\'etique et technique de mesure RF,}\\
+\textit{Simulation \'electromagn\'etique et techniques de mesure RF,}\\
 \texttt{Jean-Daniel Arnould, Institut Polytechnique de Grenoble - Phelma}
 
 \end{thebibliography}

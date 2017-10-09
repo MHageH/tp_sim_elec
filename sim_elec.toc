@@ -1,0 +1,18 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Filtre d'ordre 5}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Mod\'elisation des mailles et simulation du schematic}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Simulation avec le cuivre}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}G\'eneration d'un symbol et simulation \'electromagn\'etique}{5}{subsection.2.3}
+\contentsline {section}{\numberline {3}Antenne miniature patch}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Conception d'une antenne miniature et simulation}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}G\'en\'eration automatique des composants passifs}{9}{subsection.3.2}
+\contentsline {section}{\numberline {4}Techniques de mesures RF et de-embedding}{10}{section.4}
+\contentsline {subsection}{\numberline {4.1}Analyse des m\'ethodes du de-embedding}{10}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Calibrage ex-situ}{10}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Calibrage in-situ}{10}{subsubsection.4.1.2}
+\contentsline {subsection}{\numberline {4.2}\'Etude th\'eorique}{10}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}R\'ealisation du de-embedding}{11}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Comparaison avec un bench sans parasites}{14}{subsection.4.4}
+\contentsline {section}{\numberline {5}Conclusion}{14}{section.5}
+\contentsline {section}{R\'ef\'erences}{15}{section.5}
