@@ -40,7 +40,7 @@
 \renewcommand\refname{R\'ef\'erences}
 
 \renewcommand{\abstractname}{Pr\'eambule}
-\title{\textbf{Simulation \'electromagn\'etique \\ et technique de mesure RF}}
+\title{\textbf{Simulation \'electromagn\'etique \\ et techniques de mesure RF}}
 \author{Mohamed Hage Hassan \\ Cl\'ement Cheung}
 \date{9 Octobre 2017}
 \maketitle
@@ -137,12 +137,12 @@ schematic sont superpos\'es aux layout.
 
 
 Les param\`etres $S_{21}$ de chacune des simulations indiquent le comportement passe-bas du filtre. \`A $4 GHz$,
-on apparament une tr\`es bonne adaptation, \`a la r\'esonance, \`a plus que $-20 db$ en entr\'ee pour les deux mod\`eles.
+nous avons apparament une tr\`es bonne adaptation, \`a la r\'esonance, \`a plus que $-20 db$ en entr\'ee pour les deux mod\`eles.
 \\
 Une simulation EM est n\'ecessaire pour voir l'effet du couplage des condensateurs.\\
 
 Le mod\`ele schematic semble avoir une d\'eviation l\'eg\`ere par rapport \`a celui qui est maill\'e.
-Une bonne adaptation en entr\'ee indique que toute la puissance \'etait transf\'er\'ee \`a la charge, sachant qu'on garde
+Une bonne adaptation en entr\'ee indique que toute la puissance \'etait transf\'er\'ee \`a la charge, sachant que l'on garde
 un minimum de r\'eflexion.
 
 \clearpage
@@ -186,7 +186,7 @@ notre filtre microruban.
 On remarque que les zones en orange pr\'esentent l'onde EM confin\'ee dans la ligne de transmission fine et qu'elle s'\'etend au
 passage des lignes larges (bleu).
 
-\subsection{G\'eneration d'un symbol et simulation \'electromagn\'etique}
+\subsection{G\'eneration d'un symbole et simulation \'electromagn\'etique}
 
 L'\'etape suivante \'etait de cr\'eer un symbole de notre filtre dans ADS afin de pouvoir continuer plus facilement les simulations.
 
@@ -297,14 +297,14 @@ Le calibrage peut s'effectuer g\'en\'eralement selon deux m\'ethodes :
 
 \subsubsection{Calibrage ex-situ}
 \textbf{SOLT : Short Open Line Transition calibration} \\
-Ce type de calibrage est commercial, et d\'epend de la pr\'ecision des valeurs indiqu\'es par le fabirquant.
+Ce type de calibrage est commercial, et d\'epend de la pr\'ecision des valeurs indiqu\'es par le fabriquant.
 L'utilisation de ce type de calibrage entraine la n\'ecessit\'e de conna\^itre les standards fournis, ainsi
 que 12 termes d'erreurs \`a retrouver.
-Les charat\'eristiques g\'en\'eraux se r\'esume par :
+Les carat\'eristiques g\'en\'erales se r\'esume par :
 \begin{itemize}
-  \item[-] Rien \`a r\'egler du cot\'e d'analyseur vectoriel (pas d'algorithme).
+  \item[-] Rien \`a r\'egler du cot\'e de l'analyseur vectoriel (pas d'algorithme).
   \item[-] Proc\'edure de calibrage particuli\`erement longue.
-  \item[-] N\'ecessite une intervention en de-embedding.
+  \item[-] N\'ecessite une intervention de de-embedding.
 \end{itemize}
 
 La partie de de-embedding consiste donc de passer du plan de mesure (les PADs) vers le plan du DUT.
@@ -314,9 +314,9 @@ de s'\'etablir correctement.
 
 \subsubsection{Calibrage in-situ}
 \textbf{TRL : Thru Reflect Line } \\
-Ce type de calibrage consiste sur l'autocalibration, et c'est nous m\^eme que l'on fabrique.
-Le calibrage s'effectue, contrairement au calibrage SOLT, directement au plan du DUT, et n\'ecessite la connaissance
-de 8 termes d'erreurs.
+Ce type de calibrage repose sur l'autocalibration, et c'est nous m\^eme qui le fabriquons (m\'ethode maison).
+Le calibrage s'effectue, contrairement au calibrage SOLT, directement au plan du DUT, et ne n\'ecessite la connaissance
+que de 8 termes d'erreurs.
 
 \subsection{\'Etude th\'eorique}
 
@@ -328,7 +328,7 @@ de 8 termes d'erreurs.
 \end{center}
 \end{figure}
 
-Notre but c'est de retrouver $Y_{DUT}$, ou m\^eme $S_{DUT}$ du circuit ou \'el\'ement sous test, ici un pont en $\Pi$.
+Notre but c'est de retrouver $Y_{DUT}$, ou m\^eme $S_{DUT}$ du circuit ou de l'\'el\'ement sous test, ici un pont en $\Pi$.
 On utilise la m\'ethode short-open de-embedding, qui consiste \`a enlever les parasites par un essai de 2 types de terminaisons :
 court-circuit, puis circuit-ouvert. Rappelons que\cite{sim-elec-cours}:
 \[
@@ -346,7 +346,7 @@ ce qui implique que :
 \[
 Y_{DUT} = \bigg( \big( Y_{openpad} \big)^{-1} - \big( Y_{shortpad} \big)^{-1} \bigg)^{-1}
 \]
-Ces transformations vont \^etre coder dans un bench global pour simuler le processus du de-embedding. Une analyse va comparer
+Ces transformations vont \^etre codées dans un bench global pour simuler le processus de de-embedding. Une analyse va comparer
 les r\'esulat des simulations entre l'\'etape de de-embedding, et une analyse de l'\'el\'ement seul:
 
 \begin{figure}[!htb]
@@ -363,8 +363,8 @@ Notre m\'ethode consiste \`a :
 \begin{itemize}
   \item [-] R\'ealisation de 3 sch\'emas pour prendre en compte les terminaisons court-circuit et circuit-ouvert, ainsi que le sch\'ema
   complet.
-  \item[-] Ex\'ecution de simulations pour les 2 terminaisions short et open.
-  \item[-] Ins\'ertion des DACs de simulations dans le sch\'ema g\'en\'eral et sa simulation, en consid\'erant les transformations indiqu\'ees
+  \item[-] Ex\'ecution de simulations pour les 2 terminaisons short et open.
+  \item[-] Ins\'ertion des DACs (Data Acquisition Container) de simulations dans le sch\'ema g\'en\'eral et sa simulation, en consid\'erant les transformations indiqu\'ees
   pour arriver jusqu'a $Y_{DUT}$.
   \item[-] Comparaison du $S_{DUT}$, $Y_{DUT}$ avec une simulation du $S_{bench}$, $Y_{bench}$ d'un bench du pont en $\Pi$.
 \end{itemize}
